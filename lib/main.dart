@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/Item.dart';
+import 'widgets/DaList.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,14 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView (
-        padding: const EdgeInsets.all(8),
-        children: <Widget> [
-          Item(title: "Title A", amberShade: 900),
-          Item(title: "Title B", amberShade: 300),
-          Item(title: "Title C", amberShade: 100),
-        ],
-      )
+      body: DaList()
     );
   }
 }
