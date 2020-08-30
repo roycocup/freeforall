@@ -14,12 +14,14 @@ func main() {
 		Id    int    `json: "id"`
 		Title string `json: "title"`
 	}
-	// response := make([]map[string]string, 10)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		max := 100
 		response := []Item{}
 		for id := 1; id <= max; id++ {
-			response = append(response, Item{Id: id, Title: getRandString(int64(id))})
+			rnd := rand.Int63n(10000)
+			title := getRandString(rnd)
+			response = append(response, Item{Id: id, Title: title})
 		}
 
 		res, _ := json.Marshal(response)
