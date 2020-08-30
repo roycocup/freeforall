@@ -34,7 +34,7 @@ class DaState extends State<DaList>{
     return this._list;
   }
 
-  void fetchIt() {
+  void update() {
     getCollectionStream().then((val) {
       setState(() {
         this._list = val;
@@ -44,7 +44,7 @@ class DaState extends State<DaList>{
 
   @override
   Widget build(BuildContext context) {
-    fetchIt();
+    update();
     return ListView(children: this._list);
   }
 
