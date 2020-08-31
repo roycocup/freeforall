@@ -13,11 +13,11 @@ class DaList extends StatefulWidget {
 
 class DaState extends State<DaList>{
 
-//  final String url = "https://jsonplaceholder.typicode.com/albums";
-  final String url = "http://56e0991026b9.ngrok.io";
+  final String url = "https://jsonplaceholder.typicode.com/albums";
+//  final String url = "http://56e0991026b9.ngrok.io";
 
   List<Item> _list = [
-    Item(title: "Waiting connection...", amberShade: 900),
+    Item(title: "Waiting connection..."),
   ];
 
   Future<Widget> getCollectionStream() async {
@@ -31,7 +31,7 @@ class DaState extends State<DaList>{
 
     this._list.clear();
     lst.forEach((element) {
-      var i = Item(title: element['title'], amberShade: 100);
+      var i = Item(title: element['title']);
       this._list.add(i);
     });
 

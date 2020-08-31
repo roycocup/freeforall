@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
   final String title;
-  final int amberShade;
+  final int amberShade = 100;
 
-  Item ({Key key, this.title, this.amberShade}) : super(key: key);
+  Item ({Key key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,14 @@ class Item extends StatelessWidget {
     return Container(
       height: 50,
       color: Colors.amber[this.amberShade],
-      child: Center(
-          child: Text(this.title)
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+          )
+        ),
+        padding: EdgeInsets.all(10),
+        child: Text(this.title, textAlign: TextAlign.left),
       ),
     );
   }
