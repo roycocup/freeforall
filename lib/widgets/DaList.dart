@@ -1,57 +1,56 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'Item.dart';
 import 'package:http/http.dart' as http;
+import 'dart:developer' as dev;
 
 
 class DaList extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => DaState();
 }
 
 class DaState extends State<DaList>{
 
+//  final String url = "https://jsonplaceholder.typicode.com/albums";
+  final String url = "http://56e0991026b9.ngrok.io";
+
   List<Item> _list = [
     Item(title: "Waiting connection...", amberShade: 900),
   ];
 
-  Future<http.Response> fetchAlbum() {
-    return http.get('https://jsonplaceholder.typicode.com/albums/1');
-  }
-
-  Future<List> getCollectionStream() async {
-    sleep(Duration(seconds: 10));
-
-    List<Map> lst = [
-      {'id': '1', 'title': 'this is title 1'},
-      {'id': '2', 'title': 'this is title 2'},
-      {'id': '2', 'title': 'this is title 3'},
-    ];
+  Future<Widget> getCollectionStream() async {
+    List lst;
+    final response = await http.get(url);
+    try {
+      lst = json.decode(response.body);
+    } catch (e) {
+      dev.log(e.toString());
+    }
 
     this._list.clear();
-
     lst.forEach((element) {
       var i = Item(title: element['title'], amberShade: 100);
       this._list.add(i);
     });
 
-    return this._list;
-  }
-
-  void update() {
-    getCollectionStream().then((val) {
-      setState(() {
-        this._list = val;
-      });
-    });
+    return ListView(children: this._list);
   }
 
   @override
   Widget build(BuildContext context) {
-    update();
-    return ListView(children: this._list);
+    return FutureBuilder<Widget>(
+      future: getCollectionStream(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return snapshot.data;
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return CircularProgressIndicator();
+      },
+    );
   }
 
 

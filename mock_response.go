@@ -11,8 +11,8 @@ import (
 func main() {
 
 	type Item struct {
-		Id    int    `json: "id"`
-		Title string `json: "title"`
+		Id    int    `json:"id"`
+		Title string `json:"title"`
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
