@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'Item.dart';
+import 'package:http/http.dart' as http;
+
 
 class DaList extends StatefulWidget {
 
@@ -14,6 +16,10 @@ class DaState extends State<DaList>{
   List<Item> _list = [
     Item(title: "Waiting connection...", amberShade: 900),
   ];
+
+  Future<http.Response> fetchAlbum() {
+    return http.get('https://jsonplaceholder.typicode.com/albums/1');
+  }
 
   Future<List> getCollectionStream() async {
     sleep(Duration(seconds: 10));

@@ -16,6 +16,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
 		max := 100
 		response := []Item{}
 		for id := 1; id <= max; id++ {
