@@ -12,14 +12,10 @@ class Item extends StatelessWidget {
     return Container(
       height: 50,
       color: Colors.amber[this.amberShade],
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black,
-          )
-        ),
-        padding: EdgeInsets.all(10),
-        child: Text(this.title, textAlign: TextAlign.left),
+      child: Row(
+        children: [
+          Text(this.title, textAlign: TextAlign.left),
+        ],
       ),
     );
   }
